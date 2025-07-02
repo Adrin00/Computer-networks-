@@ -1,0 +1,75 @@
+PART-1
+
+Step-1:
+PC1 -> Command Prompt -> C:\>ipconfig /all
+PC3 -> Command Prompt -> C:\>ipconfig /all
+PC1 -> Command Prompt -> ping 10.10.1.18
+PC3 -> Command Prompt -> ping 10.10.1.98
+
+Step-2:
+PC1 -> Command Prompt -> tracert 10.10.1.18
+PC3 -> Command Prompt -> tracert 10.10.1.98
+
+Router 1
+User Access Verification
+Password:cisco 
+R1>en
+Password: class
+R1#show ip route
+
+Router-3
+User Access Verification
+Password:cisco 
+R3>en
+Password: class
+R3#show ip route
+
+Router-2
+User Access Verification
+Password:cisco 
+R2>en
+Password: class
+R2#show ip interface brief
+
+Step-3: Updating IP Address of R2’s S0/0/0 Interface
+R2#conf t
+R2 (configure)#interface s0/0/0 
+R2 (configure-if)#ip address 10.10.1.5 255.255.255.252
+R2 (configure-if)#no shutdown
+
+Step-5: Connectivity Tests from PC1 to PC3
+PC1 -> Command Prompt -> ping 10.10.1.18
+PC3 -> Command Prompt -> ping 10.10.1.98
+
+
+
+PART-2
+
+Step-1:
+PC2 -> Command Prompt -> C:\>ipconfig /all
+PC4 -> Command Prompt -> C:\>ipconfig /all
+PC2 -> Command Prompt -> ping 2001:DB8:1:4::2
+PC4 -> Command Prompt -> ping 2001:DB8:1:1::2
+
+Step-2:
+PC2 -> Command Prompt -> tracert 2001:DB8:1:4::2
+PC4 -> Command Prompt -> tracert 2001:DB8:1:1::2
+
+Router-3
+User Access Verification
+Password:cisco 
+R3>en
+Password: class
+R3#show ipv6 interface brief
+
+Step-3: Updating IP Address of PC4’s Default Gateway
+Done through the IP Configuration mode of the PC4.
+
+Step-5: Connectivity Tests from PC1 to PC3
+PC2 -> Command Prompt -> ping 2001:DB8:1:4::2
+PC4 -> Command Prompt -> ping 2001:DB8:1:1::2
+
+
+
+
+

@@ -1,0 +1,73 @@
+STEP-1: Connectivity Issues From PC-01
+PC-01 -> Command Prompt ->
+C:\>ipconfig
+C:\>ping 172.16.1.1 
+C:\>ping 209.165.201.2
+C:\>ping 172.16.1.4
+C:\>ping 172.16.2.3
+C:\>ping 172.16.2.4
+PC-01 -> Desktop -> Web Browser
+http://www.cisco.pka  
+http://209.165.201.2
+
+Updated Solution for PC-01:
+PC-01 -> IP Configuration -> 172.16.1.3
+
+
+STEP-2: Connectivity Issues From PC-02
+PC-02 -> Command Prompt ->
+C:\>ipconfig
+C:\>ping 172.16.1.1
+C:\>ping 209.165.201.2
+C:\>ping 172.16.1.3
+C:\>ping 172.16.2.3
+C:\>ping 172.16.2.4
+PC-02 -> Desktop -> Web Browser
+http://www.cisco.pka  
+http://209.165.201.2
+
+Updated Solution for PC-02:
+PC-02 -> IP Configuration -> Default gateway: 172.16.1.1
+
+
+STEP-3: Connectivity Issues From PC-A
+PC-A -> Command Prompt ->
+C:\>ipconfig
+C:\>ping 209.165.201.2
+C:\>ping 172.16.2.1
+C:\>ping 172.16.2.4
+C:\>ping 172.16.1.3
+C:\>ping 172.16.1.4
+PC-A -> Desktop -> Web Browser
+http://www.cisco.pka  
+http://209.165.201.2
+
+Updated Solution for PC-A:
+PC-01 -> Command Prompt ->
+C:\>SSH –l admin01 172.16.1.1
+Password: cisco12345
+R1# show ip interface brief
+R1# conf t
+R1(config)# interface g0/1
+R1(config-if)# ip address 172.16.2.1 255.255.255.0
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# exit
+R1# exit
+
+
+
+STEP-3: Connectivity Issues From PC-B
+PC-B -> Command Prompt ->
+C:\>ipconfig
+C:\>ping 209.165.201.2
+C:\>ping 172.16.2.1
+C:\>ping 172.16.2.3
+C:\>ping 172.16.1.3
+C:\>ping 172.16.1.4
+PC-B -> Desktop -> Web Browser
+http://www.cisco.pka  
+http://209.165.201.2
+
+
+
